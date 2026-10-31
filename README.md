@@ -4,6 +4,8 @@ Personal site of **Roger Liu** — field notes, essays and research on wildlife 
 
 Live site: https://roger-liu618.github.io/
 
+Contact: liuyuxiu0618@qq.com
+
 ## Structure
 
 ```
