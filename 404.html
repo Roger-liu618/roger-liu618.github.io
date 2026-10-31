@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found — Wild Note</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="This trail doesn't exist. Head back to Wild Note.">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="%230d2818"/><circle cx="32" cy="32" r="25" fill="none" stroke="%23c9a961" stroke-width="2.5"/><text x="32" y="42" font-family="Georgia,serif" font-style="italic" font-size="28" fill="%23c9a961" text-anchor="middle">W</text></svg>'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Noto+Serif+SC:wght@300;400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest-deep:#0a1f14; --forest-dark:#0d2818; --forest-mid:#1a3a2a;
+    --cream:#f5f3ee; --gold:#c9a961; --gold-light:#d4b87a;
+    --ink-mute:rgba(245,243,238,.55);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;}
+  body{
+    background:var(--forest-deep);
+    color:var(--cream);
+    font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+    display:flex;align-items:center;justify-content:center;
+    padding:2rem;position:relative;overflow:hidden;
+  }
+  body::before{
+    content:"";position:absolute;inset:0;
+    background:url('/images/hero-fox.jpg') center/cover no-repeat;
+    opacity:.16;filter:grayscale(.25);
+  }
+  body::after{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(ellipse at 50% 40%,rgba(10,31,20,.35),var(--forest-deep) 78%);
+  }
+  .wrap{position:relative;z-index:2;max-width:640px;text-align:center;}
+
+  .eyebrow{
+    font-size:.7rem;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:1.6rem;
+    display:flex;align-items:center;justify-content:center;gap:.9rem;
+  }
+  .eyebrow::before,.eyebrow::after{content:"";width:36px;height:1px;background:rgba(201,169,97,.45);}
+
+  .code{
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-size:clamp(4.5rem,16vw,8rem);line-height:.9;
+    color:var(--cream);letter-spacing:.04em;
+  }
+  .code span{color:var(--gold);font-style:italic;}
+
+  h1{
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-weight:400;font-size:clamp(1.5rem,4.2vw,2.1rem);
+    margin:1.4rem 0 .9rem;letter-spacing:.01em;
+  }
+  p{
+    font-size:.95rem;line-height:1.85;color:var(--ink-mute);
+    max-width:46ch;margin:0 auto 2.2rem;
+  }
+
+  .actions{display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap;}
+  .btn{
+    display:inline-block;padding:.78rem 1.9rem;
+    font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;
+    text-decoration:none;border:1px solid rgba(245,243,238,.28);
+    color:var(--cream);transition:all .3s ease;
+  }
+  .btn:hover{border-color:var(--gold);color:var(--gold);}
+  .btn.primary{background:var(--gold);border-color:var(--gold);color:var(--forest-deep);font-weight:500;}
+  .btn.primary:hover{background:var(--gold-light);border-color:var(--gold-light);color:var(--forest-deep);}
+
+  .lang{
+    position:absolute;top:1.6rem;right:1.8rem;z-index:3;
+    display:flex;align-items:center;gap:.45rem;
+    font-size:.72rem;letter-spacing:.12em;color:var(--ink-mute);
+  }
+  .lang button{
+    background:none;border:none;color:inherit;cursor:pointer;
+    font:inherit;letter-spacing:inherit;padding:.25rem .1rem;
+    transition:color .25s ease;
+  }
+  .lang button.active{color:var(--gold);}
+  .lang button:hover{color:var(--cream);}
+  .lang .sep{opacity:.4;}
+
+  .foot{
+    position:absolute;bottom:1.6rem;left:0;right:0;z-index:2;
+    text-align:center;font-size:.68rem;letter-spacing:.14em;
+    text-transform:uppercase;color:rgba(245,243,238,.32);
+  }
+
+  @media (max-width:520px){
+    .lang{top:1.1rem;right:1.1rem;}
+    p{font-size:.9rem;}
+    .foot{bottom:1.1rem;font-size:.62rem;}
+  }
+</style>
+</head>
+<body>
+
+<div class="lang" role="group" aria-label="Language">
+  <button type="button" data-lang="en" class="active" aria-pressed="true">EN</button>
+  <span class="sep">/</span>
+  <button type="button" data-lang="cn" aria-pressed="false">中</button>
+</div>
+
+<main class="wrap">
+  <div class="eyebrow">Wild Note</div>
+  <div class="code">4<span>0</span>4</div>
+
+  <h1 data-en="This trail doesn't exist." data-cn="这条小径不存在。">This trail doesn't exist.</h1>
+  <p data-en="The page you were looking for has moved, been renamed, or never existed. The wild is easier to navigate from the beginning."
+     data-cn="你找的这一页可能被移动、改名，或者从未存在过。从首页重新出发，会好走得多。">The page you were looking for has moved, been renamed, or never existed. The wild is easier to navigate from the beginning.</p>
+
+  <div class="actions">
+    <a class="btn primary" href="/" data-en="Back to Home" data-cn="返回首页">Back to Home</a>
+    <a class="btn" href="/archive.html" data-en="All Essays" data-cn="全部文章">All Essays</a>
+  </div>
+</main>
+
+<div class="foot">© 2026 Wild Note · Roger Liu</div>
+
+<script>
+(function () {
+  var KEY = 'wildnote-lang';
+  var buttons = document.querySelectorAll('.lang button');
+  var nodes = document.querySelectorAll('[data-en][data-cn]');
+
+  function apply(lang) {
+    nodes.forEach(function (el) {
+      el.textContent = lang === 'cn' ? el.getAttribute('data-cn') : el.getAttribute('data-en');
+    });
+    document.documentElement.lang = lang === 'cn' ? 'zh-CN' : 'en';
+    document.title = lang === 'cn' ? '页面不存在 — Wild Note' : 'Page Not Found — Wild Note';
+    buttons.forEach(function (b) {
+      var on = b.getAttribute('data-lang') === lang;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    try { localStorage.setItem(KEY, lang); } catch (e) {}
+  }
+
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () { apply(b.getAttribute('data-lang')); });
+  });
+
+  var saved = 'en';
+  try { saved = localStorage.getItem(KEY) || 'en'; } catch (e) {}
+  apply(saved);
+})();
+</script>
+
+</body>
+</html>
