@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wild Note</title>
+    <meta name="description" content="Roger Liu — a high school student's field journal and portfolio on wildlife conservation, biodiversity, and green development.">
+    <meta property="og:title" content="Wild Note — Roger Liu">
+    <meta property="og:description" content="Listening to the wild, one story at a time.">
+    <meta property="og:image" content="images/hero-tiger.jpg">
+    <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="%230d2818"/><circle cx="32" cy="32" r="25" fill="none" stroke="%23c9a961" stroke-width="2.5"/><text x="32" y="42" font-family="Georgia,serif" font-style="italic" font-size="28" fill="%23c9a961" text-anchor="middle">W</text></svg>'>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Noto+Serif+SC:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="images/hero-fox.jpg">
+
+    <style>
+        /* ==================== Design Tokens ==================== */
+        :root {
+            --forest-deep: #0a1f14;
+            --forest-dark: #0d2818;
+            --forest-mid: #1a3a2a;
+            --forest-light: #2d5a3d;
+            --forest-mist: #3a6b4e;
+            --cream: #f5f3ee;
+            --cream-warm: #ebe7dd;
+            --cream-dark: #d4cfc3;
+            --gold: #c9a961;
+            --gold-light: #d4b87a;
+            --gold-dark: #a8893f;
+            --white: #ffffff;
+            --text-dark: #1a2e22;
+            --text-mute: #5a6b5e;
+            --shadow-soft: 0 4px 30px rgba(10, 31, 20, 0.08);
+            --shadow-medium: 0 8px 50px rgba(10, 31, 20, 0.12);
+            --shadow-deep: 0 20px 70px rgba(10, 31, 20, 0.25);
+            --transition-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+            --serif: 'Cormorant Garamond', 'Noto Serif SC', serif;
+            --sans: 'Inter', 'Noto Serif SC', sans-serif;
+            --cn-serif: 'Noto Serif SC', 'Cormorant Garamond', serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--sans);
+            color: var(--text-dark);
+            background: var(--cream);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        ::selection { background: var(--forest-mid); color: var(--gold-light); }
+
+        /* ==================== Scrollbar ==================== */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--forest-deep); }
+        ::-webkit-scrollbar-thumb { background: var(--forest-mist); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gold-dark); }
+
+        /* ==================== Navigation ==================== */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            z-index: 1000;
+            padding: 1.2rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.5s var(--transition-smooth);
+        }
+
+        .nav.scrolled {
+            background: rgba(10, 31, 20, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 0.8rem 3rem;
+            box-shadow: 0 1px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+            color: var(--cream);
+        }
+
+        .nav-logo-icon {
+            width: 36px; height: 36px;
+            border: 1.5px solid var(--gold);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--serif);
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--gold);
+            transition: all 0.4s ease;
+        }
+
+        .nav-logo:hover .nav-logo-icon {
+            background: var(--gold);
+            color: var(--forest-deep);
+            transform: rotate(360deg);
+        }
+
+        .nav-logo-text {
+            font-family: var(--serif);
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+        }
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: rgba(245, 243, 238, 0.75);
+            font-size: 0.82rem;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 1px;
+            background: var(--gold);
+            transition: width 0.3s var(--transition-smooth);
+        }
+
+        .nav-link:hover { color: var(--gold-light); }
+        .nav-link:hover::after { width: 100%; }
+
+        .lang-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(201, 169, 97, 0.1);
+            border: 1px solid rgba(201, 169, 97, 0.3);
+            border-radius: 30px;
+            padding: 4px;
+            cursor: pointer;
+        }
+
+        .lang-btn {
+            background: none; border: none;
+            color: rgba(245, 243, 238, 0.6);
+            font-size: 0.7rem; font-weight: 600;
+            letter-spacing: 1px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: var(--sans);
+        }
+
+        .lang-btn.active { background: var(--gold); color: var(--forest-deep); }
+
+        .nav-mobile {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            background: none;
+            border: none;
+        }
+
+        .nav-mobile span {
+            width: 22px; height: 1.5px;
+            background: var(--cream);
+            transition: all 0.3s ease;
+        }
+
+        /* ==================== Hero with Rotating Images ==================== */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 650px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-bg-wrap {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+        }
+
+        .hero-bg-slide {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 2.5s ease-in-out;
+            will-change: opacity;
+        }
+
+        .hero-bg-slide.active {
+            opacity: 1;
+            animation: heroZoom 18s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.12); }
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(
+                180deg,
+                rgba(10, 31, 20, 0.55) 0%,
+                rgba(10, 31, 20, 0.35) 30%,
+                rgba(10, 31, 20, 0.65) 70%,
+                rgba(10, 31, 20, 0.92) 100%
+            );
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: var(--cream);
+            padding: 0 2rem;
+            max-width: 900px;
+        }
+
+        .hero-eyebrow {
+            font-family: var(--sans);
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 1s var(--transition-smooth) 0.3s forwards;
+        }
+
+        .hero-eyebrow::before, .hero-eyebrow::after {
+            content: '';
+            display: inline-block;
+            width: 40px; height: 1px;
+            background: var(--gold);
+            vertical-align: middle;
+            margin: 0 1.2rem;
+        }
+
+        .hero-title {
+            font-family: var(--serif);
+            font-size: clamp(3.5rem, 9vw, 7rem);
+            font-weight: 400;
+            letter-spacing: 3px;
+            line-height: 1;
+            margin-bottom: 0.3rem;
+            opacity: 0;
+            animation: fadeUp 1.2s var(--transition-smooth) 0.5s forwards;
+        }
+
+        .hero-tagline {
+            font-family: var(--serif);
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            font-weight: 300;
+            font-style: italic;
+            color: rgba(245, 243, 238, 0.85);
+            max-width: 580px;
+            margin: 1.5rem auto 3rem;
+            line-height: 1.8;
+            opacity: 0;
+            animation: fadeUp 1.2s var(--transition-smooth) 0.7s forwards;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.9rem 2.5rem;
+            border: 1px solid var(--gold);
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.4s var(--transition-smooth);
+            opacity: 0;
+            animation: fadeUp 1.2s var(--transition-smooth) 0.9s forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-cta::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: var(--gold);
+            transition: left 0.4s var(--transition-smooth);
+            z-index: -1;
+        }
+
+        .hero-cta:hover::before { left: 0; }
+        .hero-cta:hover { color: var(--forest-deep); border-color: var(--gold); }
+        .hero-cta-arrow { font-size: 1rem; transition: transform 0.3s ease; }
+        .hero-cta:hover .hero-cta-arrow { transform: translateX(5px); }
+
+        /* Slide indicators */
+        .hero-indicators {
+            position: absolute;
+            bottom: 2.5rem;
+            right: 3rem;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            opacity: 0;
+            animation: fadeUp 1s var(--transition-smooth) 1.5s forwards;
+        }
+
+        .hero-indicator {
+            width: 2px; height: 24px;
+            background: rgba(245, 243, 238, 0.2);
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            padding: 0;
+        }
+
+        .hero-indicator.active {
+            background: var(--gold);
+            height: 36px;
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            opacity: 0;
+            animation: fadeUp 1s var(--transition-smooth) 1.3s forwards;
+        }
+
+        .hero-scroll-text {
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(245, 243, 238, 0.5);
+        }
+
+        .hero-scroll-line {
+            width: 1px; height: 50px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-scroll-line::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: 0;
+            width: 100%; height: 50%;
+            background: var(--gold);
+            animation: scrollDown 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollDown { 0% { top: -50%; } 100% { top: 100%; } }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ==================== Section Common ==================== */
+        .section {
+            padding: 7rem 3rem;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-eyebrow {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .section-eyebrow::after {
+            content: '';
+            display: block;
+            width: 30px; height: 1px;
+            background: var(--gold);
+            margin: 1rem auto 0;
+        }
+
+        .section-title {
+            font-family: var(--serif);
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 500;
+            color: var(--forest-dark);
+            letter-spacing: 2px;
+        }
+
+        /* ==================== About (no image, elegant text) ==================== */
+        .about {
+            background: var(--cream);
+            position: relative;
+        }
+
+        .about-inner {
+            max-width: 760px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-decor {
+            width: 60px; height: 1px;
+            background: var(--gold);
+            margin: 0 auto 2.5rem;
+            position: relative;
+        }
+
+        .about-decor::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px; height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+
+        .about-name {
+            font-family: var(--serif);
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 500;
+            color: var(--forest-dark);
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .about-role {
+            font-size: 0.78rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+            margin-bottom: 2.5rem;
+        }
+
+        .about-text p {
+            font-size: 1rem;
+            color: var(--text-mute);
+            margin-bottom: 1.5rem;
+            line-height: 2;
+        }
+
+        .about-text p:first-of-type::first-letter {
+            font-family: var(--serif);
+            font-size: 3.5rem;
+            font-weight: 600;
+            float: left;
+            line-height: 0.9;
+            margin: 0.3rem 0.6rem 0 0;
+            color: var(--forest-dark);
+        }
+
+        .about-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-top: 2.5rem;
+        }
+
+        .about-tag {
+            padding: 0.4rem 1.1rem;
+            border: 1px solid rgba(45, 90, 61, 0.3);
+            border-radius: 30px;
+            font-size: 0.72rem;
+            color: var(--forest-mid);
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .about-tag:hover {
+            background: var(--forest-mid);
+            color: var(--cream);
+            border-color: var(--forest-mid);
+        }
+
+        /* ==================== Fieldwork (portfolio cards) ==================== */
+        .fieldwork {
+            background: var(--cream-warm);
+        }
+
+        .works-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .work-card {
+            background: var(--cream);
+            border: 1px solid rgba(45, 90, 61, 0.12);
+            border-top: 2px solid transparent;
+            padding: 2.2rem 2rem;
+            transition: all 0.5s var(--transition-smooth);
+            position: relative;
+        }
+
+        .work-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-medium);
+            border-top-color: var(--gold);
+        }
+
+        .work-card-top {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .work-card-year {
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: var(--gold-dark);
+        }
+
+        .work-card-org {
+            font-size: 0.68rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-mute);
+            text-align: right;
+        }
+
+        .work-card-title {
+            font-family: var(--serif);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--forest-dark);
+            line-height: 1.5;
+            margin-bottom: 0.9rem;
+        }
+
+        .work-card-desc {
+            font-size: 0.84rem;
+            color: var(--text-mute);
+            line-height: 1.85;
+        }
+
+        .work-card-line {
+            width: 30px; height: 1px;
+            background: var(--gold);
+            margin-top: 1.4rem;
+            transition: width 0.4s var(--transition-smooth);
+        }
+
+        .work-card:hover .work-card-line { width: 60px; }
+
+        /* ==================== Topics (no images, elegant cards) ==================== */
+        .topics {
+            background: var(--forest-dark);
+            color: var(--cream);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .topics::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at 30% 20%, rgba(58, 107, 78, 0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 80%, rgba(201, 169, 97, 0.06) 0%, transparent 50%);
+        }
+
+        .topics .section-title { color: var(--cream); }
+        .topics .section-eyebrow { color: var(--gold); }
+
+        .topics-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .topic-card {
+            position: relative;
+            padding: 3rem 2.5rem;
+            border: 1px solid rgba(201, 169, 97, 0.15);
+            background: rgba(26, 58, 42, 0.3);
+            transition: all 0.5s var(--transition-smooth);
+            overflow: hidden;
+        }
+
+        .topic-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 2px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s var(--transition-smooth);
+        }
+
+        .topic-card:hover {
+            background: rgba(26, 58, 42, 0.5);
+            border-color: rgba(201, 169, 97, 0.4);
+            transform: translateY(-6px);
+        }
+
+        .topic-card:hover::before { transform: scaleX(1); }
+
+        .topic-card-number {
+            font-family: var(--serif);
+            font-size: 3.5rem;
+            font-style: italic;
+            font-weight: 400;
+            color: var(--gold);
+            opacity: 0.25;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            transition: opacity 0.4s ease;
+        }
+
+        .topic-card:hover .topic-card-number { opacity: 0.5; }
+
+        .topic-card-icon {
+            width: 48px; height: 48px;
+            margin-bottom: 1.2rem;
+            opacity: 0.6;
+            transition: opacity 0.4s ease;
+        }
+
+        .topic-card:hover .topic-card-icon { opacity: 1; }
+
+        .topic-card-title {
+            font-family: var(--serif);
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--cream);
+            margin-bottom: 1rem;
+        }
+
+        .topic-card-desc {
+            font-size: 0.85rem;
+            color: rgba(245, 243, 238, 0.6);
+            line-height: 1.8;
+        }
+
+        .topic-card-line {
+            width: 30px; height: 1px;
+            background: var(--gold);
+            margin-top: 1.5rem;
+            transition: width 0.4s var(--transition-smooth);
+        }
+
+        .topic-card:hover .topic-card-line { width: 60px; }
+
+        /* ==================== Articles (no images, text cards) ==================== */
+        .articles {
+            background: var(--cream);
+        }
+
+        .articles-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .article-card {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            background: var(--cream-warm);
+            padding: 2.5rem 2rem;
+            border-radius: 2px;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.5s var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            border-top: 3px solid transparent;
+        }
+
+        .article-card:hover {
+            box-shadow: var(--shadow-deep);
+            transform: translateY(-8px);
+            border-top-color: var(--gold);
+        }
+
+        .article-card-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .article-card-cat {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--gold-dark);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .article-card-dot {
+            width: 3px; height: 3px;
+            background: var(--text-mute);
+            border-radius: 50%;
+            opacity: 0.4;
+        }
+
+        .article-card-date {
+            font-size: 0.72rem;
+            color: var(--text-mute);
+            letter-spacing: 1px;
+        }
+
+        .article-card-title {
+            font-family: var(--serif);
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--forest-dark);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+            transition: color 0.3s ease;
+        }
+
+        .article-card:hover .article-card-title { color: var(--forest-light); }
+
+        .article-card-excerpt {
+            font-size: 0.85rem;
+            color: var(--text-mute);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--forest-mid);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: gap 0.3s ease, color 0.3s ease;
+        }
+
+        .article-card:hover .article-card-link {
+            gap: 0.8rem;
+            color: var(--gold-dark);
+        }
+
+        .articles-cta {
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .articles-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.9rem 2.5rem;
+            background: var(--forest-dark);
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.4s var(--transition-smooth);
+            border: 1px solid var(--forest-dark);
+        }
+
+        .articles-cta-btn:hover {
+            background: transparent;
+            color: var(--forest-dark);
+            border-color: var(--gold);
+        }
+
+        /* ==================== Quote Section ==================== */
+        .quote-section {
+            background: var(--forest-deep);
+            padding: 8rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-section::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px; height: 600px;
+            border: 1px solid rgba(201, 169, 97, 0.08);
+            border-radius: 50%;
+        }
+
+        .quote-section::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px; height: 400px;
+            border: 1px solid rgba(201, 169, 97, 0.05);
+            border-radius: 50%;
+        }
+
+        .quote-mark {
+            font-family: var(--serif);
+            font-size: 5rem;
+            color: var(--gold);
+            opacity: 0.3;
+            line-height: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-text {
+            font-family: var(--serif);
+            font-size: clamp(1.3rem, 3vw, 2rem);
+            font-weight: 300;
+            color: var(--cream);
+            max-width: 800px;
+            margin: 1rem auto 1.5rem;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-author {
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(245, 243, 238, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ==================== Footer ==================== */
+        .footer {
+            background: var(--forest-deep);
+            color: rgba(245, 243, 238, 0.5);
+            padding: 4rem 3rem 2rem;
+            border-top: 1px solid rgba(201, 169, 97, 0.15);
+        }
+
+        .footer-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h4 {
+            font-family: var(--serif);
+            font-size: 1.8rem;
+            color: var(--cream);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-brand p {
+            font-size: 0.85rem;
+            line-height: 1.8;
+            max-width: 350px;
+        }
+
+        .footer-col h5 {
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.2rem;
+        }
+
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 0.7rem; }
+
+        .footer-col a {
+            text-decoration: none;
+            color: rgba(245, 243, 238, 0.5);
+            font-size: 0.82rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-col a:hover { color: var(--gold-light); }
+
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(201, 169, 97, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.72rem;
+        }
+
+        .footer-bottom a {
+            color: rgba(245, 243, 238, 0.3);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom a:hover { color: var(--gold-light); }
+
+        /* ==================== Reveal Animations ==================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s var(--transition-smooth), transform 1s var(--transition-smooth);
+        }
+
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.15s; }
+        .reveal-delay-2 { transition-delay: 0.3s; }
+        .reveal-delay-3 { transition-delay: 0.45s; }
+
+        /* ==================== Responsive ==================== */
+        @media (max-width: 968px) {
+            .nav { padding: 1rem 1.5rem; }
+            .nav.scrolled { padding: 0.6rem 1.5rem; }
+            .nav-center {
+                display: none;
+                position: absolute;
+                top: 100%; left: 0; right: 0;
+                background: rgba(10, 31, 20, 0.97);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+            }
+            .nav-center.mobile-open { display: flex; }
+            .nav-mobile { display: flex; }
+            .section { padding: 5rem 1.5rem; }
+            .topics-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .articles-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+            .hero-eyebrow::before, .hero-eyebrow::after { width: 20px; margin: 0 0.6rem; }
+            .hero-indicators { right: 1.5rem; }
+        }
+
+        @media (max-width: 600px) {
+            .hero-title { letter-spacing: 1px; }
+            .topic-card { padding: 2rem 1.5rem; }
+            .work-card { padding: 1.8rem 1.5rem; }
+        }
+
+        /* ==================== Reduced Motion ==================== */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            html { scroll-behavior: auto; }
+            .reveal { opacity: 1; transform: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== Navigation ==================== -->
+    <nav class="nav" id="nav">
+        <a href="#hero" class="nav-logo">
+            <span class="nav-logo-icon" aria-hidden="true">W</span>
+            <span class="nav-logo-text">Wild Note</span>
+        </a>
+        <ul class="nav-center" id="navLinks">
+            <li><a href="#about" class="nav-link" data-en="About" data-cn="关于">About</a></li>
+            <li><a href="#fieldwork" class="nav-link" data-en="Fieldwork" data-cn="田野">Fieldwork</a></li>
+            <li><a href="#topics" class="nav-link" data-en="Themes" data-cn="主题">Themes</a></li>
+            <li><a href="#articles" class="nav-link" data-en="Essays" data-cn="文章">Essays</a></li>
+        </ul>
+        <div style="display:flex; align-items:center; gap:1rem;">
+            <div class="lang-toggle" role="group" aria-label="Language">
+                <button class="lang-btn active" id="langEN" type="button">EN</button>
+                <button class="lang-btn" id="langCN" type="button" lang="zh-CN">中</button>
+            </div>
+            <button class="nav-mobile" id="navMobile" type="button" aria-label="Menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ==================== Hero with Rotating Wildlife Images ==================== -->
+    <section class="hero" id="hero">
+        <div class="hero-bg-wrap" id="heroBgWrap">
+            <div class="hero-bg-slide active" style="background-image: url('images/hero-fox.jpg')"></div>
+            <div class="hero-bg-slide" style="background-image: url('images/hero-deer.jpg')"></div>
+            <div class="hero-bg-slide" style="background-image: url('images/hero-snow-leopard.jpg')"></div>
+            <div class="hero-bg-slide" style="background-image: url('images/hero-ibis.jpg')"></div>
+            <div class="hero-bg-slide" style="background-image: url('images/hero-elephant.jpg')"></div>
+            <div class="hero-bg-slide" style="background-image: url('images/hero-tiger.jpg')"></div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-eyebrow" data-en="Wildlife · Biodiversity · Green Growth" data-cn="野生动物 · 生物多样性 · 绿色发展">Wildlife · Biodiversity · Green Growth</p>
+            <h1 class="hero-title">Wild Note</h1>
+            <p class="hero-tagline" data-en="Listening to the wild, one story at a time. The field journal and portfolio of Roger Liu." data-cn="倾听野生的声音，一篇一故事。Roger Liu 的田野笔记与个人作品集。">Listening to the wild, one story at a time. The field journal and portfolio of Roger Liu.</p>
+            <a href="#about" class="hero-cta">
+                <span data-en="Begin Exploring" data-cn="开始探索">Begin Exploring</span>
+                <span class="hero-cta-arrow" aria-hidden="true">&rarr;</span>
+            </a>
+        </div>
+        <div class="hero-indicators" id="heroIndicators" aria-label="Slides"></div>
+        <div class="hero-scroll" aria-hidden="true">
+            <span class="hero-scroll-text">Scroll</span>
+            <div class="hero-scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ==================== About ==================== -->
+    <section class="section about" id="about">
+        <div class="section-header reveal">
+            <span class="section-eyebrow" data-en="About" data-cn="关于">About</span>
+            <h2 class="section-title" data-en="A Voice for the Wild" data-cn="为野生发声">A Voice for the Wild</h2>
+        </div>
+        <div class="about-inner reveal reveal-delay-1">
+            <div class="about-decor" aria-hidden="true"></div>
+            <h3 class="about-name">Roger Liu</h3>
+            <p class="about-role" data-en="High School Student · Wildlife Enthusiast" data-cn="高中生 · 野生动物爱好者">High School Student · Wildlife Enthusiast</p>
+            <div class="about-text">
+                <p data-en="I am a high school student with a deep love for wildlife. From watching documentaries about endangered species as a child to leading my school's biology club today, the natural world has always been my deepest concern. Wildlife conservation, biodiversity, green development — these are not just academic terms, but the directions of my daily thought and action." data-cn="我是一名高中生，深爱着野生动物。从儿时观看濒危物种纪录片，到如今负责学校生物社的规划与运营，自然世界始终是我最深切的关怀。野生动物保护、生物多样性、绿色发展——这些不仅是学科术语，更是我日常思考与实践的方向。">I am a high school student with a deep love for wildlife. From watching documentaries about endangered species as a child to leading my school's biology club today, the natural world has always been my deepest concern. Wildlife conservation, biodiversity, green development — these are not just academic terms, but the directions of my daily thought and action.</p>
+                <p data-en="My path runs from the desk to the field and back: designing a controlled experiment on microplastics and earthworms for an independent research program, surveying species on mountain transects, counting bird-window collisions around campus, and writing down what all of it teaches me. This website is my field journal — a record of observations, thoughts, and actions." data-cn="我的路径从书桌到田野，再回到书桌：在研究计划中设计微塑料与蚯蚓的对照实验，在山间样线上做物种调查，统计校园周围的鸟撞记录，并把这一切教给我的事写下来。这个网站是我的田野笔记——记录观察、整理思考、分享行动。">My path runs from the desk to the field and back: designing a controlled experiment on microplastics and earthworms for an independent research program, surveying species on mountain transects, counting bird-window collisions around campus, and writing down what all of it teaches me. This website is my field journal — a record of observations, thoughts, and actions.</p>
+                <p data-en="If you too care about the future of wildlife on this planet, you are welcome to stay, read, and join the conversation." data-cn="如果你也关心这颗星球上野生动物的未来，欢迎在这里停留、阅读、对话。">If you too care about the future of wildlife on this planet, you are welcome to stay, read, and join the conversation.</p>
+            </div>
+            <div class="about-tags">
+                <span class="about-tag" data-en="Wildlife Conservation" data-cn="野生动物保护">Wildlife Conservation</span>
+                <span class="about-tag" data-en="Soil Ecology Research" data-cn="土壤生态研究">Soil Ecology Research</span>
+                <span class="about-tag" data-en="Biology Club Lead" data-cn="生物社负责人">Biology Club Lead</span>
+                <span class="about-tag" data-en="Community Science" data-cn="公众科学">Community Science</span>
+                <span class="about-tag" data-en="Nature Journaling" data-cn="自然观察笔记">Nature Journaling</span>
+                <span class="about-tag" data-en="Sustainable Living" data-cn="可持续生活">Sustainable Living</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== Fieldwork & Research (Portfolio) ==================== -->
+    <section class="section fieldwork" id="fieldwork">
+        <div class="section-header reveal">
+            <span class="section-eyebrow" data-en="Experience" data-cn="经历">Experience</span>
+            <h2 class="section-title" data-en="Fieldwork &amp; Research" data-cn="田野与研究">Fieldwork &amp; Research</h2>
+        </div>
+        <div class="works-grid">
+            <div class="work-card reveal reveal-delay-1">
+                <div class="work-card-top">
+                    <span class="work-card-year">2026</span>
+                    <span class="work-card-org" data-en="Buqing Research Program" data-cn="步青计划">Buqing Research Program</span>
+                </div>
+                <h3 class="work-card-title" data-en="Microplastics, Earthworms &amp; Soil Water Safety" data-cn="微塑料、蚯蚓与土壤水环境安全">Microplastics, Earthworms &amp; Soil Water Safety</h3>
+                <p class="work-card-desc" data-en="Independent research project on how microplastic pollution affects Eisenia fetida and soil water environments — designing controlled mesocosm experiments, exposure groups, and testing protocols." data-cn="步青计划课题：微塑料污染对赤子爱胜蚓及土壤水环境的影响——自主设计对照饲养实验、暴露分组与检测方案。">Independent research project on how microplastic pollution affects Eisenia fetida and soil water environments — designing controlled mesocosm experiments, exposure groups, and testing protocols.</p>
+                <div class="work-card-line" aria-hidden="true"></div>
+            </div>
+            <div class="work-card reveal reveal-delay-2">
+                <div class="work-card-top">
+                    <span class="work-card-year">2026</span>
+                    <span class="work-card-org" data-en="Nanjing Agricultural University" data-cn="南京农业大学">Nanjing Agricultural University</span>
+                </div>
+                <h3 class="work-card-title" data-en="Biodiversity Field Practicum" data-cn="生物多样性野外实习">Biodiversity Field Practicum</h3>
+                <p class="work-card-desc" data-en="Multi-day field practicum in the Huangshan region: transect surveys, species identification, and field records — learning how ecologists actually count and document life." data-cn="黄山地区多日野外实习：样线调查、物种识别与野外记录——学习生态学家如何真正地清点与记录生命。">Multi-day field practicum in the Huangshan region: transect surveys, species identification, and field records — learning how ecologists actually count and document life.</p>
+                <div class="work-card-line" aria-hidden="true"></div>
+            </div>
+            <div class="work-card reveal reveal-delay-3">
+                <div class="work-card-top">
+                    <span class="work-card-year">2025 —</span>
+                    <span class="work-card-org" data-en="School Biology Club" data-cn="校生物社">School Biology Club</span>
+                </div>
+                <h3 class="work-card-title" data-en="Club Lead &amp; Program Designer" data-cn="社长与课程设计">Club Lead &amp; Program Designer</h3>
+                <p class="work-card-desc" data-en="Planning and running a weekly, 90-minute club program: a full-semester series of ten hands-on biology and chemistry experiments, balanced between fun and challenge." data-cn="规划并运营每周 90 分钟的社团课程：设计一学期十个动手生物与化学实验，在趣味与挑战之间取得平衡。">Planning and running a weekly, 90-minute club program: a full-semester series of ten hands-on biology and chemistry experiments, balanced between fun and challenge.</p>
+                <div class="work-card-line" aria-hidden="true"></div>
+            </div>
+            <div class="work-card reveal">
+                <div class="work-card-top">
+                    <span class="work-card-year">2025</span>
+                    <span class="work-card-org" data-en="Community Science" data-cn="公众科学">Community Science</span>
+                </div>
+                <h3 class="work-card-title" data-en="Bird–Window Collision Survey" data-cn="鸟撞调查行动">Bird–Window Collision Survey</h3>
+                <p class="work-card-desc" data-en="Participating in a citizen-science survey of bird-window collisions: systematic patrol routes, collision records, and proposals for bird-friendly glass treatments." data-cn="参与鸟撞公众科学调查：系统巡查路线、碰撞记录，并提出对鸟类友好的玻璃改造建议。">Participating in a citizen-science survey of bird-window collisions: systematic patrol routes, collision records, and proposals for bird-friendly glass treatments.</p>
+                <div class="work-card-line" aria-hidden="true"></div>
+            </div>
+            <div class="work-card reveal reveal-delay-1">
+                <div class="work-card-top">
+                    <span class="work-card-year">2025</span>
+                    <span class="work-card-org" data-en="Roadkill Monitoring" data-cn="路杀监测">Roadkill Monitoring</span>
+                </div>
+                <h3 class="work-card-title" data-en="Roadkill Survey Workshop" data-cn="路杀调查研讨会">Roadkill Survey Workshop</h3>
+                <p class="work-card-desc" data-en="Workshop on roadkill monitoring: survey protocols, species identification from remains, and how volunteer data feeds into wildlife-vehicle collision research." data-cn="路杀监测研讨会：调查规范、残骸物种识别，以及志愿者数据如何汇入车辆撞击野生动物的研究。">Workshop on roadkill monitoring: survey protocols, species identification from remains, and how volunteer data feeds into wildlife-vehicle collision research.</p>
+                <div class="work-card-line" aria-hidden="true"></div>
+            </div>
+            <div class="work-card reveal reveal-delay-2">
+                <div class="work-card-top">
+                    <span class="work-card-year">2025–26</span>
+                    <span class="work-card-org" data-en="Cornell Online Programs" data-cn="康奈尔线上课程">Cornell Online Programs</span>
+                </div>
+                <h3 class="work-card-title" data-en="Conservation &amp; Environmental Education Coursework" data-cn="保护与环境教育课程">Conservation &amp; Environmental Education Coursework</h3>
+                <p class="work-card-desc" data-en="Online coursework and projects with Cornell programs: biodiversity conservation, urban environmental education, and a campus plastic-reduction action project." data-cn="康奈尔线上课程与项目：生物多样性保护、城市环境教育，以及校园减塑行动项目。">Online coursework and projects with Cornell programs: biodiversity conservation, urban environmental education, and a campus plastic-reduction action project.</p>
+                <div class="work-card-line" aria-hidden="true"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== Topics ==================== -->
+    <section class="section topics" id="topics">
+        <div class="section-header reveal">
+            <span class="section-eyebrow" data-en="Core Themes" data-cn="关注主题">Core Themes</span>
+            <h2 class="section-title" data-en="Three Paths, One Wild" data-cn="三条路径，一片荒野">Three Paths, One Wild</h2>
+        </div>
+        <div class="topics-grid">
+            <div class="topic-card reveal reveal-delay-1">
+                <div class="topic-card-number" aria-hidden="true">01</div>
+                <svg class="topic-card-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M24 8C16 8 10 14 10 22C10 30 16 36 24 36C32 36 38 30 38 22C38 14 32 8 24 8Z" stroke="#c9a961" stroke-width="1.5"/>
+                    <circle cx="24" cy="22" r="4" stroke="#c9a961" stroke-width="1.5"/>
+                    <path d="M20 14C18 12 15 12 13 14M28 14C30 12 33 12 35 14" stroke="#c9a961" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M24 36V40M18 40H30" stroke="#c9a961" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <h3 class="topic-card-title" data-en="Wildlife Protection" data-cn="野生动物保护">Wildlife Protection</h3>
+                <p class="topic-card-desc" data-en="Following the plight of endangered species and imagining coexistence between humans and wildlife. From snow leopards on the Tibetan Plateau to sea turtles in the Pacific, every species tells a story worth hearing." data-cn="关注濒危物种的生存现状，思考人与野生动物共存的边界与可能。从青藏高原的雪豹到太平洋的海龟，每一个物种都有一个值得倾听的故事。">Following the plight of endangered species and imagining coexistence between humans and wildlife. From snow leopards on the Tibetan Plateau to sea turtles in the Pacific, every species tells a story worth hearing.</p>
+                <div class="topic-card-line" aria-hidden="true"></div>
+            </div>
+            <div class="topic-card reveal reveal-delay-2">
+                <div class="topic-card-number" aria-hidden="true">02</div>
+                <svg class="topic-card-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <circle cx="16" cy="18" r="5" stroke="#c9a961" stroke-width="1.5"/>
+                    <circle cx="32" cy="18" r="5" stroke="#c9a961" stroke-width="1.5"/>
+                    <circle cx="24" cy="30" r="5" stroke="#c9a961" stroke-width="1.5"/>
+                    <circle cx="12" cy="32" r="4" stroke="#c9a961" stroke-width="1.5"/>
+                    <circle cx="36" cy="32" r="4" stroke="#c9a961" stroke-width="1.5"/>
+                    <path d="M16 18L32 18M16 18L24 30M32 18L24 30M12 32L24 30M36 32L24 30" stroke="#c9a961" stroke-width="1" opacity="0.4"/>
+                </svg>
+                <h3 class="topic-card-title" data-en="Biodiversity" data-cn="生物多样性">Biodiversity</h3>
+                <p class="topic-card-desc" data-en="From a single wetland to an entire rainforest, understanding how the web of life is woven — and torn. Every species lost is a thread cut from the fabric of existence." data-cn="从一片湿地到整片雨林，理解生命之网如何编织——又如何被撕裂。每一个物种的消失，都是从存在之布上剪断的一根线。">From a single wetland to an entire rainforest, understanding how the web of life is woven — and torn. Every species lost is a thread cut from the fabric of existence.</p>
+                <div class="topic-card-line" aria-hidden="true"></div>
+            </div>
+            <div class="topic-card reveal reveal-delay-3">
+                <div class="topic-card-number" aria-hidden="true">03</div>
+                <svg class="topic-card-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M24 10C20 10 17 13 17 17C17 20 19 22 22 23V28H26V23C29 22 31 20 31 17C31 13 28 10 24 10Z" stroke="#c9a961" stroke-width="1.5"/>
+                    <path d="M24 28V38M18 38H30" stroke="#c9a961" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M14 34C12 34 10 36 10 38M34 34C36 34 38 36 38 38" stroke="#c9a961" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <h3 class="topic-card-title" data-en="Green Development" data-cn="绿色发展">Green Development</h3>
+                <p class="topic-card-desc" data-en="Exploring how economic growth and ecological protection can cease to be enemies, and seeking paths to a sustainable future where both people and wildlife can thrive." data-cn="探索经济增长与生态保护如何不再对立，寻找人与野生动物都能繁荣的可持续未来之路。">Exploring how economic growth and ecological protection can cease to be enemies, and seeking paths to a sustainable future where both people and wildlife can thrive.</p>
+                <div class="topic-card-line" aria-hidden="true"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== Articles ==================== -->
+    <section class="section articles" id="articles">
+        <div class="section-header reveal">
+            <span class="section-eyebrow" data-en="Recent Essays" data-cn="近期文章">Recent Essays</span>
+            <h2 class="section-title" data-en="Field Notes" data-cn="田野笔记">Field Notes</h2>
+        </div>
+        <div class="articles-grid">
+            <a href="essays/snow-leopard.html" class="article-card reveal reveal-delay-1">
+                <div class="article-card-meta">
+                    <span class="article-card-cat" data-en="Wildlife" data-cn="野生动物">Wildlife</span>
+                    <span class="article-card-dot" aria-hidden="true"></span>
+                    <span class="article-card-date">2026.08.15</span>
+                </div>
+                <h3 class="article-card-title" data-en="The Snow Leopard Returns: Silence and Comeback of the King of the Plateau" data-cn="雪豹归来：高原之王的沉默与复返">The Snow Leopard Returns: Silence and Comeback of the King of the Plateau</h3>
+                <p class="article-card-excerpt" data-en="On the scree slopes of Sanjiangyuan, a camera trap caught a blurred pattern of spots — a trace left by a snow leopard unseen for years..." data-cn="在三江源的碎石坡上，红外相机捕捉到了一张模糊的斑纹。这是消失多年的雪豹留下的痕迹……">On the scree slopes of Sanjiangyuan, a camera trap caught a blurred pattern of spots — a trace left by a snow leopard unseen for years...</p>
+                <span class="article-card-link">
+                    <span data-en="Read More" data-cn="阅读全文">Read More</span> <span aria-hidden="true">&rarr;</span>
+                </span>
+            </a>
+            <a href="essays/wetlands.html" class="article-card reveal reveal-delay-2">
+                <div class="article-card-meta">
+                    <span class="article-card-cat" data-en="Biodiversity" data-cn="生物多样性">Biodiversity</span>
+                    <span class="article-card-dot" aria-hidden="true"></span>
+                    <span class="article-card-date">2026.08.02</span>
+                </div>
+                <h3 class="article-card-title" data-en="The Silence of Wetlands: A History of Species Loss in a Reed Marsh" data-cn="湿地的沉默：一片芦苇荡里的物种消亡史">The Silence of Wetlands: A History of Species Loss in a Reed Marsh</h3>
+                <p class="article-card-excerpt" data-en="The wetland near my hometown was once alive with frog songs and heron cries. Now it sits in unsettling silence. What happened?" data-cn="我故乡旁边的那片湿地，曾经蛙声一片、鹭鸣不断。如今却安静得令人不安。这背后发生了什么？">The wetland near my hometown was once alive with frog songs and heron cries. Now it sits in unsettling silence. What happened?</p>
+                <span class="article-card-link">
+                    <span data-en="Read More" data-cn="阅读全文">Read More</span> <span aria-hidden="true">&rarr;</span>
+                </span>
+            </a>
+            <a href="essays/gdp-carbon.html" class="article-card reveal reveal-delay-3">
+                <div class="article-card-meta">
+                    <span class="article-card-cat" data-en="Green Growth" data-cn="绿色发展">Green Growth</span>
+                    <span class="article-card-dot" aria-hidden="true"></span>
+                    <span class="article-card-date">2026.07.20</span>
+                </div>
+                <h3 class="article-card-title" data-en="When GDP Meets Carbon Budget: A Student's Confusion and Quest" data-cn="当GDP遇上碳预算：一个高中生的困惑与求索">When GDP Meets Carbon Budget: A Student's Confusion and Quest</h3>
+                <p class="article-card-excerpt" data-en="My politics textbook says development is paramount; my geography textbook says carbon emissions are a crisis. Between two textbooks, I search for my own answer." data-cn="政治课本上说发展是硬道理，地理课本上说碳排放是危机。两本课本之间，我试图找到自己的答案。">My politics textbook says development is paramount; my geography textbook says carbon emissions are a crisis. Between two textbooks, I search for my own answer.</p>
+                <span class="article-card-link">
+                    <span data-en="Read More" data-cn="阅读全文">Read More</span> <span aria-hidden="true">&rarr;</span>
+                </span>
+            </a>
+        </div>
+        <div class="articles-cta reveal">
+            <a href="archive.html" class="articles-cta-btn">
+                <span data-en="View All Essays" data-cn="查看全部文章">View All Essays</span>
+                <span aria-hidden="true">&rarr;</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ==================== Quote ==================== -->
+    <section class="quote-section">
+        <div class="quote-mark" aria-hidden="true">&ldquo;</div>
+        <p class="quote-text" data-en="The least we can do for the wild is to remember them. For what we forget, we cannot save." data-cn="我们至少应该记住野生的它们。因为被遗忘的，便无法被拯救。">The least we can do for the wild is to remember them. For what we forget, we cannot save.</p>
+        <p class="quote-author" data-en="— Roger Liu, Wild Note" data-cn="—— Roger Liu，Wild Note">— Roger Liu, Wild Note</p>
+    </section>
+
+    <!-- ==================== Footer ==================== -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h4>Wild Note</h4>
+                <p data-en="A personal journal on wildlife, biodiversity, and green development by Roger Liu. Here, every wild heartbeat deserves to be heard." data-cn="Wild Note —— Roger Liu 关于野生动物、生物多样性与绿色发展的个人笔记。在这里，每一次野生的心跳都值得被倾听。">A personal journal on wildlife, biodiversity, and green development by Roger Liu. Here, every wild heartbeat deserves to be heard.</p>
+            </div>
+            <div class="footer-col">
+                <h5 data-en="Navigate" data-cn="导航">Navigate</h5>
+                <ul>
+                    <li><a href="#about" data-en="About" data-cn="关于">About</a></li>
+                    <li><a href="#fieldwork" data-en="Fieldwork" data-cn="田野">Fieldwork</a></li>
+                    <li><a href="#topics" data-en="Themes" data-cn="主题">Themes</a></li>
+                    <li><a href="archive.html" data-en="All Essays" data-cn="全部文章">All Essays</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5 data-en="Connect" data-cn="联系">Connect</h5>
+                <ul>
+                    <li><a href="mailto:hello@example.com" data-en="Email" data-cn="电子邮件">Email</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-en="© 2026 Wild Note · Roger Liu · Writing for the wild" data-cn="© 2026 Wild Note · Roger Liu · 为野生书写">© 2026 Wild Note · Roger Liu · Writing for the wild</p>
+            <p data-en="Wildlife photography by AI generation" data-cn="野生动物摄影：AI 生成">Wildlife photography by AI generation</p>
+        </div>
+    </footer>
+
+    <!-- ==================== JavaScript ==================== -->
+    <script>
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // ===== Navigation scroll effect =====
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 60);
+        }, { passive: true });
+
+        // ===== Hero rotating background images =====
+        const slides = document.querySelectorAll('.hero-bg-slide');
+        const indicatorsWrap = document.getElementById('heroIndicators');
+        let currentSlide = 0;
+        let slideTimer = null;
+
+        slides.forEach((_, i) => {
+            const btn = document.createElement('button');
+            btn.className = 'hero-indicator' + (i === 0 ? ' active' : '');
+            btn.type = 'button';
+            btn.setAttribute('aria-label', 'Slide ' + (i + 1));
+            btn.addEventListener('click', () => goToSlide(i));
+            indicatorsWrap.appendChild(btn);
+        });
+        const indicators = document.querySelectorAll('.hero-indicator');
+
+        function goToSlide(index) {
+            slides[currentSlide].classList.remove('active');
+            indicators[currentSlide].classList.remove('active');
+            currentSlide = index;
+            slides[currentSlide].classList.add('active');
+            indicators[currentSlide].classList.add('active');
+            resetTimer();
+        }
+
+        function nextSlide() {
+            goToSlide((currentSlide + 1) % slides.length);
+        }
+
+        function resetTimer() {
+            if (slideTimer) clearInterval(slideTimer);
+            if (!prefersReducedMotion) {
+                slideTimer = setInterval(nextSlide, 6000);
+            }
+        }
+        resetTimer();
+
+        // Pause carousel when the tab is hidden
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                if (slideTimer) { clearInterval(slideTimer); slideTimer = null; }
+            } else {
+                resetTimer();
+            }
+        });
+
+        // ===== Hero parallax =====
+        const heroBgWrap = document.getElementById('heroBgWrap');
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            if (scrolled < window.innerHeight && !prefersReducedMotion) {
+                heroBgWrap.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        }, { passive: true });
+
+        // ===== Mobile menu =====
+        const navMobile = document.getElementById('navMobile');
+        const navLinks = document.getElementById('navLinks');
+        navMobile.addEventListener('click', () => {
+            const open = navLinks.classList.toggle('mobile-open');
+            navMobile.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('mobile-open');
+                navMobile.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // ===== Reveal on scroll =====
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // ===== Bilingual toggle (default: English) =====
+        function setLanguage(lang) {
+            document.querySelectorAll('[data-cn]').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (text !== null && text !== '') {
+                    el.textContent = text;
+                }
+            });
+            document.documentElement.lang = lang === 'cn' ? 'zh-CN' : 'en';
+            document.getElementById('langEN').classList.toggle('active', lang === 'en');
+            document.getElementById('langCN').classList.toggle('active', lang === 'cn');
+            document.title = lang === 'cn' ? 'Wild Note · 野生笔记' : 'Wild Note';
+            try { localStorage.setItem('wildnote-lang', lang); } catch (e) {}
+        }
+
+        document.getElementById('langEN').addEventListener('click', () => setLanguage('en'));
+        document.getElementById('langCN').addEventListener('click', () => setLanguage('cn'));
+
+        // ===== Smooth anchor links =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const target = document.querySelector(targetId);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ===== Initialize: restore saved language or default English =====
+        let savedLang = 'en';
+        try { savedLang = localStorage.getItem('wildnote-lang') || 'en'; } catch (e) {}
+        setLanguage(savedLang);
+    </script>
+</body>
+</html>

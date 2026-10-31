@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Silence of Wetlands: A History of Species Loss in a Reed Marsh — Wild Note</title>
+<meta name="description" content="The wetland near my hometown was once alive with frog songs and heron cries. Learning to hear what is missing — and to count it before it is gone.">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="%230d2818"/><circle cx="32" cy="32" r="25" fill="none" stroke="%23c9a961" stroke-width="2.5"/><text x="32" y="42" font-family="Georgia,serif" font-style="italic" font-size="28" fill="%23c9a961" text-anchor="middle">W</text></svg>'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Noto+Serif+SC:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+        :root {
+            --forest-deep:#0a1f14; --forest-dark:#0d2818; --forest-mid:#1a3a2a;
+            --forest-light:#2d5a3d; --forest-mist:#3a6b4e;
+            --cream:#f5f3ee; --cream-warm:#ebe7dd;
+            --gold:#c9a961; --gold-light:#d4b87a; --gold-dark:#a8893f;
+            --text-dark:#1a2e22; --text-mute:#5a6b5e;
+            --shadow-soft:0 4px 30px rgba(10,31,20,.08);
+            --transition-smooth:cubic-bezier(.16,1,.3,1);
+            --serif:'Cormorant Garamond','Noto Serif SC',serif;
+            --sans:'Inter','Noto Serif SC',sans-serif;
+        }
+        *{margin:0;padding:0;box-sizing:border-box;}
+        html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
+        body{font-family:var(--sans);color:var(--text-dark);background:var(--cream);line-height:1.8;overflow-x:hidden;}
+        ::selection{background:var(--forest-mid);color:var(--gold-light);}
+        .nav{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:1.2rem 3rem;display:flex;align-items:center;justify-content:space-between;transition:all .5s var(--transition-smooth);}
+        .nav.scrolled{background:rgba(10,31,20,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:.8rem 3rem;box-shadow:0 1px 30px rgba(0,0,0,.3);}
+        .nav-logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--cream);}
+        .nav-logo-icon{width:36px;height:36px;border:1.5px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.1rem;font-style:italic;color:var(--gold);transition:all .4s ease;}
+        .nav-logo:hover .nav-logo-icon{background:var(--gold);color:var(--forest-deep);transform:rotate(360deg);}
+        .nav-logo-text{font-family:var(--serif);font-size:1.4rem;font-weight:500;letter-spacing:2px;}
+        .nav-right{display:flex;align-items:center;gap:1.2rem;}
+        .lang-toggle{display:flex;align-items:center;gap:.4rem;background:rgba(201,169,97,.1);border:1px solid rgba(201,169,97,.3);border-radius:30px;padding:4px;cursor:pointer;}
+        .lang-btn{background:none;border:none;color:rgba(245,243,238,.6);font-size:.7rem;font-weight:600;letter-spacing:1px;padding:5px 12px;border-radius:20px;cursor:pointer;transition:all .3s ease;font-family:var(--sans);}
+        .lang-btn.active{background:var(--gold);color:var(--forest-deep);}
+        .article-wrap{max-width:760px;margin:0 auto;padding:10rem 2rem 6rem;}
+        .a-cat{font-size:.7rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold-dark);display:block;text-align:center;margin-bottom:1.2rem;}
+        .a-title{font-family:var(--serif);font-size:clamp(1.9rem,4.5vw,2.9rem);font-weight:500;color:var(--forest-dark);line-height:1.4;text-align:center;margin-bottom:1.4rem;}
+        .a-meta{display:flex;justify-content:center;align-items:center;gap:.9rem;font-size:.75rem;color:var(--text-mute);letter-spacing:1px;margin-bottom:1rem;}
+        .a-dot{width:3px;height:3px;background:var(--text-mute);border-radius:50%;opacity:.4;}
+        .a-decor{width:60px;height:1px;background:var(--gold);margin:2.5rem auto 4rem;position:relative;}
+        .a-decor::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:8px;height:8px;background:var(--gold);border-radius:50%;}
+        .a-body p{font-size:1.02rem;color:#33473a;margin-bottom:1.6rem;line-height:2.05;}
+        .a-body p.lead::first-letter{font-family:var(--serif);font-size:3.5rem;font-weight:600;float:left;line-height:.9;margin:.3rem .6rem 0 0;color:var(--forest-dark);}
+        .a-body h2{font-family:var(--serif);font-size:1.55rem;font-weight:600;color:var(--forest-dark);margin:2.6rem 0 1.2rem;line-height:1.5;}
+        .a-body h2::after{content:'';display:block;width:30px;height:1px;background:var(--gold);margin-top:.8rem;}
+        .a-quote{font-family:var(--serif);font-style:italic;font-size:1.25rem;font-weight:300;color:var(--forest-mid);border-left:2px solid var(--gold);padding:.4rem 0 .4rem 1.6rem;margin:2.4rem 0;line-height:1.9;}
+        .a-sign{margin-top:3.5rem;text-align:center;}
+        .a-sign .name{font-family:var(--serif);font-size:1.2rem;font-style:italic;color:var(--forest-mid);}
+        .a-nav{display:flex;justify-content:center;gap:2.5rem;margin-top:3rem;}
+        .a-nav a{font-size:.75rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--forest-mid);text-decoration:none;transition:color .3s ease;}
+        .a-nav a:hover{color:var(--gold-dark);}
+        .footer{background:var(--forest-deep);color:rgba(245,243,238,.5);padding:2.5rem 3rem;text-align:center;font-size:.75rem;}
+        .footer a{color:rgba(245,243,238,.5);text-decoration:none;transition:color .3s ease;}
+        .footer a:hover{color:var(--gold-light);}
+        @media (max-width:968px){
+            .nav{padding:1rem 1.5rem;}
+            .nav.scrolled{padding:.6rem 1.5rem;}
+            .article-wrap{padding:8rem 1.5rem 4rem;}
+        }
+        @media (prefers-reduced-motion:reduce){
+            *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}
+            html{scroll-behavior:auto;}
+        }
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav-logo"><span class="nav-logo-icon" aria-hidden="true">W</span><span class="nav-logo-text">Wild Note</span></a>
+  <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button class="lang-btn active" id="langEN" type="button">EN</button>
+      <button class="lang-btn" id="langCN" type="button" lang="zh-CN">中</button>
+    </div>
+  </div>
+</nav>
+<main class="article-wrap">
+        <span class="a-cat" data-en="Biodiversity" data-cn="生物多样性">Biodiversity</span>
+        <h1 class="a-title" data-en="The Silence of Wetlands: A History of Species Loss in a Reed Marsh" data-cn="湿地的沉默：一片芦苇荡里的物种消亡史">The Silence of Wetlands: A History of Species Loss in a Reed Marsh</h1>
+        <div class="a-meta">
+            <span>2026.08.02</span><span class="a-dot"></span>
+            <span>Roger Liu · Wild Note</span>
+        </div>
+        <div class="a-decor" aria-hidden="true"></div>
+        <article class="a-body">
+            <p class=" lead" data-en="As a child, the wetland near my hometown was a wall of sound. Frogs started before the rain even arrived, a rolling chorus that swelled and ebbed all night; herons argued at first light; in the reeds, something rustled constantly — warblers, moorhens, things I never learned to name. I thought that was simply what a wetland was: loud, crowded, indifferent to us." data-cn="小时候，故乡旁边的那片湿地是一堵声音的墙。雨还没到，蛙声先起，一整夜涨落不息；清晨鹭鸟争吵；芦苇丛里永远有窸窸窣窣的动静——莺、黑水鸡，还有许多我始终没学会叫出名字的东西。我以为湿地本来就是这样：喧闹、拥挤、对我们毫不在意。">As a child, the wetland near my hometown was a wall of sound. Frogs started before the rain even arrived, a rolling chorus that swelled and ebbed all night; herons argued at first light; in the reeds, something rustled constantly — warblers, moorhens, things I never learned to name. I thought that was simply what a wetland was: loud, crowded, indifferent to us.</p>
+            <p class="" data-en="This spring I went back with a notebook. The water is still there. The reeds are still there. What is missing is everything that used to live between them. I stood for an hour at dusk and heard — almost nothing. It was not the peaceful silence of wild places. It was a subtracted silence, the sound of absent things." data-cn="今年春天，我带着笔记本回去了。水还在，芦苇还在。消失的，是曾经生活在它们之间的一切。黄昏时分我站了一个小时，听到的——几乎是零。那不是荒野的安宁之静，而是一种被减去的静，是不在场者的声音。">This spring I went back with a notebook. The water is still there. The reeds are still there. What is missing is everything that used to live between them. I stood for an hour at dusk and heard — almost nothing. It was not the peaceful silence of wild places. It was a subtracted silence, the sound of absent things.</p>
+            <h2 data-en="An anatomy of disappearance" data-cn="一场消失的解剖">An anatomy of disappearance</h2>
+            <p class="" data-en="Talking with neighbors, I pieced together the sequence. Sections of reed were cleared for a road and a storage yard; the water table was drawn down as pumps served new construction; fertilizer and pesticide runoff threaded in from upstream fields. Amphibians need shallow, fish-free water to breed; herons need those frogs and small fish in return. Each change looked minor on its own. Stacked together, they rebuilt the wetland into a place that no longer works for the species that made it loud." data-cn="和邻居们聊天，我拼出了整个顺序。一段芦苇荡为修路和货场被清理；新工地的水泵把地下水位抽低；上游农田的化肥农药随水渗进来。两栖动物需要没有鱼的浅水繁殖，鹭鸟又需要那些蛙和小鱼。每一步单看都不算什么。叠加在一起，它们把湿地改造成了一个不再适合那些“喧闹制造者”生存的地方。">Talking with neighbors, I pieced together the sequence. Sections of reed were cleared for a road and a storage yard; the water table was drawn down as pumps served new construction; fertilizer and pesticide runoff threaded in from upstream fields. Amphibians need shallow, fish-free water to breed; herons need those frogs and small fish in return. Each change looked minor on its own. Stacked together, they rebuilt the wetland into a place that no longer works for the species that made it loud.</p>
+            <p class="" data-en="What unsettles me most is not the loss itself but how quietly it was accepted. My younger cousin, who grew up after the change, thinks the marsh was always this quiet. Ecologists call this the shifting baseline: every generation inherits a smaller version of nature and mistakes it for the original. The history of a reed marsh, then, is not written in dramatic collapses. It is a ledger of small absences, each entry easy to miss." data-cn="最让我不安的不是消失本身，而是它被多么安静地接受了。在变化之后长大的表弟以为，这片湿地从来就是这么静。生态学家把这叫作“基线偏移”：每一代人都继承一个更小的自然，并把它误认为原本的样子。所以一片芦苇荡的历史，并不是由剧烈的崩塌写成的。它是一本由细小缺席组成的账本，每一笔都容易被漏记。">What unsettles me most is not the loss itself but how quietly it was accepted. My younger cousin, who grew up after the change, thinks the marsh was always this quiet. Ecologists call this the shifting baseline: every generation inherits a smaller version of nature and mistakes it for the original. The history of a reed marsh, then, is not written in dramatic collapses. It is a ledger of small absences, each entry easy to miss.</p>
+            <blockquote class="a-quote" data-en="You don't notice the hole in the world until you remember what used to live in it." data-cn="只有当你记起这里曾住着什么，你才会看见世界上的这个洞。">You don't notice the hole in the world until you remember what used to live in it.</blockquote>
+            <h2 data-en="Learning to listen" data-cn="学会倾听">Learning to listen</h2>
+            <p class="" data-en="There is a discipline for hearing what is missing: acoustic monitoring. Volunteers record frog calls with ordinary phones at fixed points and fixed times; software turns the recordings into spectrograms and call-activity indices. The data is simple, cheap, and honest — a census taken by ear. I joined a small survey like this, and what struck me was not the technology but the posture: counting is a form of caring. You cannot grieve for, or defend, a species you never learned to notice." data-cn="有一种学科专门教人听见“缺失”：声学监测。志愿者在固定地点、固定时间用普通手机录下蛙鸣，软件把录音转成声谱图和鸣叫活跃度指数。这些数据简单、便宜、诚实——用耳朵做的人口普查。我参加过一次这样的小调查，打动我的不是技术，而是姿态：清点本身就是一种在乎。你无法为一种从未留意过的物种悲伤，也无法为它辩护。">There is a discipline for hearing what is missing: acoustic monitoring. Volunteers record frog calls with ordinary phones at fixed points and fixed times; software turns the recordings into spectrograms and call-activity indices. The data is simple, cheap, and honest — a census taken by ear. I joined a small survey like this, and what struck me was not the technology but the posture: counting is a form of caring. You cannot grieve for, or defend, a species you never learned to notice.</p>
+            <p class="" data-en="Silence, it turns out, is data too. If we keep records — of what sang here, and when, and in what numbers — then even silence can testify. The reed marsh near my hometown may never fully regain its chorus. But the next wetland over still can, if enough people remember what a wetland is supposed to sound like." data-cn="原来，寂静也是数据。只要我们持续记录——这里曾有什么在歌唱，在什么时候，以怎样的规模——那么连寂静也可以作证。故乡的这片芦苇荡也许无法完全找回它的合唱。但隔壁那片湿地还可以，只要有足够多的人记得，一片湿地本该是什么声音。">Silence, it turns out, is data too. If we keep records — of what sang here, and when, and in what numbers — then even silence can testify. The reed marsh near my hometown may never fully regain its chorus. But the next wetland over still can, if enough people remember what a wetland is supposed to sound like.</p>
+        </article>
+        <div class="a-sign">
+            <p class="name">— Roger Liu</p>
+            <nav class="a-nav">
+                <a href="../archive.html" data-en="&larr; All Essays" data-cn="&larr; 全部文章">&larr; All Essays</a>
+                <a href="../index.html" data-en="Back to Home" data-cn="返回首页">Back to Home</a>
+            </nav>
+        </div>
+    </main>
+<footer class="footer">
+  <p data-en="© 2026 Wild Note · Roger Liu · Writing for the wild" data-cn="© 2026 Wild Note · Roger Liu · 为野生书写">© 2026 Wild Note · Roger Liu · Writing for the wild</p>
+  <p style="margin-top:.4rem;"><a href="../index.html" data-en="← Back to Home" data-cn="← 返回首页">← Back to Home</a></p>
+</footer>
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60),{passive:true});
+function setLanguage(lang){
+  document.querySelectorAll('[data-cn]').forEach(el=>{
+    const t=el.getAttribute('data-'+lang);
+    if(t!==null&&t!=='')el.textContent=t;
+  });
+  document.documentElement.lang=lang==='cn'?'zh-CN':'en';
+  document.getElementById('langEN').classList.toggle('active',lang==='en');
+  document.getElementById('langCN').classList.toggle('active',lang==='cn');
+  document.title=lang==='cn'?'湿地的沉默：一片芦苇荡里的物种消亡史 — Wild Note':'The Silence of Wetlands: A History of Species Loss in a Reed Marsh — Wild Note';
+  try{localStorage.setItem('wildnote-lang',lang);}catch(e){}
+}
+document.getElementById('langEN').addEventListener('click',()=>setLanguage('en'));
+document.getElementById('langCN').addEventListener('click',()=>setLanguage('cn'));
+let savedLang='en';
+try{savedLang=localStorage.getItem('wildnote-lang')||'en';}catch(e){}
+setLanguage(savedLang);
+</script>
+</body>
+</html>

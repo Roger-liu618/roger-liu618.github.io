@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>When GDP Meets Carbon Budget: A Student's Confusion and Quest — Wild Note</title>
+<meta name="description" content="My politics textbook says development is paramount; my geography textbook says carbon emissions are a crisis. Between two textbooks, I search for my own answer.">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="%230d2818"/><circle cx="32" cy="32" r="25" fill="none" stroke="%23c9a961" stroke-width="2.5"/><text x="32" y="42" font-family="Georgia,serif" font-style="italic" font-size="28" fill="%23c9a961" text-anchor="middle">W</text></svg>'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Noto+Serif+SC:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+        :root {
+            --forest-deep:#0a1f14; --forest-dark:#0d2818; --forest-mid:#1a3a2a;
+            --forest-light:#2d5a3d; --forest-mist:#3a6b4e;
+            --cream:#f5f3ee; --cream-warm:#ebe7dd;
+            --gold:#c9a961; --gold-light:#d4b87a; --gold-dark:#a8893f;
+            --text-dark:#1a2e22; --text-mute:#5a6b5e;
+            --shadow-soft:0 4px 30px rgba(10,31,20,.08);
+            --transition-smooth:cubic-bezier(.16,1,.3,1);
+            --serif:'Cormorant Garamond','Noto Serif SC',serif;
+            --sans:'Inter','Noto Serif SC',sans-serif;
+        }
+        *{margin:0;padding:0;box-sizing:border-box;}
+        html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
+        body{font-family:var(--sans);color:var(--text-dark);background:var(--cream);line-height:1.8;overflow-x:hidden;}
+        ::selection{background:var(--forest-mid);color:var(--gold-light);}
+        .nav{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:1.2rem 3rem;display:flex;align-items:center;justify-content:space-between;transition:all .5s var(--transition-smooth);}
+        .nav.scrolled{background:rgba(10,31,20,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:.8rem 3rem;box-shadow:0 1px 30px rgba(0,0,0,.3);}
+        .nav-logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--cream);}
+        .nav-logo-icon{width:36px;height:36px;border:1.5px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.1rem;font-style:italic;color:var(--gold);transition:all .4s ease;}
+        .nav-logo:hover .nav-logo-icon{background:var(--gold);color:var(--forest-deep);transform:rotate(360deg);}
+        .nav-logo-text{font-family:var(--serif);font-size:1.4rem;font-weight:500;letter-spacing:2px;}
+        .nav-right{display:flex;align-items:center;gap:1.2rem;}
+        .lang-toggle{display:flex;align-items:center;gap:.4rem;background:rgba(201,169,97,.1);border:1px solid rgba(201,169,97,.3);border-radius:30px;padding:4px;cursor:pointer;}
+        .lang-btn{background:none;border:none;color:rgba(245,243,238,.6);font-size:.7rem;font-weight:600;letter-spacing:1px;padding:5px 12px;border-radius:20px;cursor:pointer;transition:all .3s ease;font-family:var(--sans);}
+        .lang-btn.active{background:var(--gold);color:var(--forest-deep);}
+        .article-wrap{max-width:760px;margin:0 auto;padding:10rem 2rem 6rem;}
+        .a-cat{font-size:.7rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold-dark);display:block;text-align:center;margin-bottom:1.2rem;}
+        .a-title{font-family:var(--serif);font-size:clamp(1.9rem,4.5vw,2.9rem);font-weight:500;color:var(--forest-dark);line-height:1.4;text-align:center;margin-bottom:1.4rem;}
+        .a-meta{display:flex;justify-content:center;align-items:center;gap:.9rem;font-size:.75rem;color:var(--text-mute);letter-spacing:1px;margin-bottom:1rem;}
+        .a-dot{width:3px;height:3px;background:var(--text-mute);border-radius:50%;opacity:.4;}
+        .a-decor{width:60px;height:1px;background:var(--gold);margin:2.5rem auto 4rem;position:relative;}
+        .a-decor::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:8px;height:8px;background:var(--gold);border-radius:50%;}
+        .a-body p{font-size:1.02rem;color:#33473a;margin-bottom:1.6rem;line-height:2.05;}
+        .a-body p.lead::first-letter{font-family:var(--serif);font-size:3.5rem;font-weight:600;float:left;line-height:.9;margin:.3rem .6rem 0 0;color:var(--forest-dark);}
+        .a-body h2{font-family:var(--serif);font-size:1.55rem;font-weight:600;color:var(--forest-dark);margin:2.6rem 0 1.2rem;line-height:1.5;}
+        .a-body h2::after{content:'';display:block;width:30px;height:1px;background:var(--gold);margin-top:.8rem;}
+        .a-quote{font-family:var(--serif);font-style:italic;font-size:1.25rem;font-weight:300;color:var(--forest-mid);border-left:2px solid var(--gold);padding:.4rem 0 .4rem 1.6rem;margin:2.4rem 0;line-height:1.9;}
+        .a-sign{margin-top:3.5rem;text-align:center;}
+        .a-sign .name{font-family:var(--serif);font-size:1.2rem;font-style:italic;color:var(--forest-mid);}
+        .a-nav{display:flex;justify-content:center;gap:2.5rem;margin-top:3rem;}
+        .a-nav a{font-size:.75rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--forest-mid);text-decoration:none;transition:color .3s ease;}
+        .a-nav a:hover{color:var(--gold-dark);}
+        .footer{background:var(--forest-deep);color:rgba(245,243,238,.5);padding:2.5rem 3rem;text-align:center;font-size:.75rem;}
+        .footer a{color:rgba(245,243,238,.5);text-decoration:none;transition:color .3s ease;}
+        .footer a:hover{color:var(--gold-light);}
+        @media (max-width:968px){
+            .nav{padding:1rem 1.5rem;}
+            .nav.scrolled{padding:.6rem 1.5rem;}
+            .article-wrap{padding:8rem 1.5rem 4rem;}
+        }
+        @media (prefers-reduced-motion:reduce){
+            *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}
+            html{scroll-behavior:auto;}
+        }
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav-logo"><span class="nav-logo-icon" aria-hidden="true">W</span><span class="nav-logo-text">Wild Note</span></a>
+  <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button class="lang-btn active" id="langEN" type="button">EN</button>
+      <button class="lang-btn" id="langCN" type="button" lang="zh-CN">中</button>
+    </div>
+  </div>
+</nav>
+<main class="article-wrap">
+        <span class="a-cat" data-en="Green Growth" data-cn="绿色发展">Green Growth</span>
+        <h1 class="a-title" data-en="When GDP Meets Carbon Budget: A Student's Confusion and Quest" data-cn="当GDP遇上碳预算：一个高中生的困惑与求索">When GDP Meets Carbon Budget: A Student's Confusion and Quest</h1>
+        <div class="a-meta">
+            <span>2026.07.20</span><span class="a-dot"></span>
+            <span>Roger Liu · Wild Note</span>
+        </div>
+        <div class="a-decor" aria-hidden="true"></div>
+        <article class="a-body">
+            <p class=" lead" data-en="Two textbooks sit on my desk, and for a long time they seemed to disagree. The politics textbook says development is the hard truth — that a country's first duty is to lift livelihoods. The geography textbook shows a different curve: rising emissions, rising temperatures, a horizon becoming a deadline. Both books are correct. That is exactly what confused me, and what this essay is about." data-cn="我的书桌上并排放着两本课本，很长一段时间里，它们好像在争吵。政治课本说，发展是硬道理——国家首先要让人民过上好日子。地理课本则画出另一条曲线：排放上升，气温上升，地平线正在变成截止日期。两本书都是对的。这正是让我困惑的地方，也是这篇文章的起点。">Two textbooks sit on my desk, and for a long time they seemed to disagree. The politics textbook says development is the hard truth — that a country's first duty is to lift livelihoods. The geography textbook shows a different curve: rising emissions, rising temperatures, a horizon becoming a deadline. Both books are correct. That is exactly what confused me, and what this essay is about.</p>
+            <h2 data-en="The idea of a carbon budget" data-cn="“碳预算”这个概念">The idea of a carbon budget</h2>
+            <p class="" data-en="The concept that untangled the knot for me is the carbon budget. The atmosphere is not a bottomless bin; for a given temperature goal — say 1.5 degrees Celsius — scientists can estimate the total amount of CO2 humanity can still emit. That remainder is a fixed account, shared by every country, every industry, every person, forever. Once you see emissions as spending from a finite account, “peak carbon” and “carbon neutrality” stop sounding like slogans and start sounding like arithmetic: every tonne spent now is a tonne unavailable later, so the only questions are what to spend it on, and how fast." data-cn="真正替我解开这个结的，是碳预算。大气不是一个无底的垃圾桶；对于某个升温目标——比如 1.5 摄氏度——科学家可以估算出人类还能排放的二氧化碳总量。这笔余量是一个固定账户，由每个国家、每个行业、每个人永久共享。一旦你把排放看作对有限账户的支出，“碳达峰”“碳中和”就不再像口号，而开始像算术：现在花掉的每一吨，都是将来花不到的一吨。于是剩下的问题只有两个——花在什么上，以及花多快。">The concept that untangled the knot for me is the carbon budget. The atmosphere is not a bottomless bin; for a given temperature goal — say 1.5 degrees Celsius — scientists can estimate the total amount of CO2 humanity can still emit. That remainder is a fixed account, shared by every country, every industry, every person, forever. Once you see emissions as spending from a finite account, “peak carbon” and “carbon neutrality” stop sounding like slogans and start sounding like arithmetic: every tonne spent now is a tonne unavailable later, so the only questions are what to spend it on, and how fast.</p>
+            <p class="" data-en="So can an economy grow and shrink its emissions at the same time? Some countries have managed periods of absolute decoupling — GDP up, emissions down — helped by renewables, efficiency, and structural shifts. But part of the apparent win is accounting: rich countries outsource manufacturing, and with it the emissions, to others. Green growth is possible; it is not automatic. It has to be engineered." data-cn="那么，经济能不能一边增长、一边减排？一些国家确实出现过“绝对脱钩”的时期——GDP 上升，排放下降——靠的是可再生能源、能效提升和结构转型。但其中一部分“胜利”其实是记账方式：发达国家把制造业、连同排放一起，外包给了别国。绿色增长是可能的，但它不会自动发生。它必须被设计出来。">So can an economy grow and shrink its emissions at the same time? Some countries have managed periods of absolute decoupling — GDP up, emissions down — helped by renewables, efficiency, and structural shifts. But part of the apparent win is accounting: rich countries outsource manufacturing, and with it the emissions, to others. Green growth is possible; it is not automatic. It has to be engineered.</p>
+            <blockquote class="a-quote" data-en="The economy is a wholly owned subsidiary of the environment. — Herman Daly" data-cn="经济是环境的全资子公司。——赫尔曼·戴利">The economy is a wholly owned subsidiary of the environment. — Herman Daly</blockquote>
+            <h2 data-en="My own small audit" data-cn="我自己的小小核算">My own small audit</h2>
+            <p class="" data-en="I wanted to test the idea at a scale I could actually measure, so I ran a small audit of my own life and my school lab: how I commute, how much food waste leaves our canteen, how many single-use plastics pass through the biology club in a semester. With classmates, we turned the plastic finding into a campus reduction action — swaps, reuse stations, a simple tracking sheet. The interesting part was not guilt; it was systems design. Where the reusable option was made easier than the disposable one, behavior changed almost by itself." data-cn="我想在一个自己真的能测量的尺度上检验这个想法，于是给我的生活和学校实验室做了一次小小核算：怎么通勤、食堂产出多少厨余、生物社一学期消耗多少一次性塑料。和同学们一起，我们把塑料这一项做成了校园减塑行动——替代品、重复使用点、一张简单的记录表。有意思的部分不是愧疚，而是系统设计。只要让可重复使用的选项比一次性的更方便，行为几乎会自动改变。">I wanted to test the idea at a scale I could actually measure, so I ran a small audit of my own life and my school lab: how I commute, how much food waste leaves our canteen, how many single-use plastics pass through the biology club in a semester. With classmates, we turned the plastic finding into a campus reduction action — swaps, reuse stations, a simple tracking sheet. The interesting part was not guilt; it was systems design. Where the reusable option was made easier than the disposable one, behavior changed almost by itself.</p>
+            <p class="" data-en="It also taught me why GDP alone is a poor map. GDP counts the throughput of an economy but says nothing about the account it draws from. That is why economists keep proposing corrections: the Human Development Index, ecological footprint, and green GDP pilot accounting, including work done in China. Measurement is not decoration. A country, like a student, will optimize whatever it decides to write down." data-cn="这也让我明白，为什么单看 GDP 是一张残缺的地图。GDP 统计的是经济体量，却对它取用的那个账户只字不提。所以经济学家们不断提出修正：人类发展指数、生态足迹，以及绿色 GDP 试点核算——中国也做过相关探索。度量方式不是装饰。一个国家和一个学生一样，会去优化它决定记录下来的东西。">It also taught me why GDP alone is a poor map. GDP counts the throughput of an economy but says nothing about the account it draws from. That is why economists keep proposing corrections: the Human Development Index, ecological footprint, and green GDP pilot accounting, including work done in China. Measurement is not decoration. A country, like a student, will optimize whatever it decides to write down.</p>
+            <p class="" data-en="So the two textbooks do not really disagree. “Development or protection” is a false dichotomy; the real questions are what kind of development, for whom, and on whose timescale. The carbon budget does not ask me to stop caring about growth. It asks me to care about it with a ledger open. My quest is not finished — I just keep both textbooks open now." data-cn="所以，两本课本其实并不矛盾。“发展还是保护”是一个伪两难；真正的问题是：要什么样的发展，为了谁，以谁的时间尺度。碳预算并没有要我不再关心增长，它只是要我在账本摊开的前提下关心增长。我的求索没有结束——我现在只是同时打开着两本课本。">So the two textbooks do not really disagree. “Development or protection” is a false dichotomy; the real questions are what kind of development, for whom, and on whose timescale. The carbon budget does not ask me to stop caring about growth. It asks me to care about it with a ledger open. My quest is not finished — I just keep both textbooks open now.</p>
+        </article>
+        <div class="a-sign">
+            <p class="name">— Roger Liu</p>
+            <nav class="a-nav">
+                <a href="../archive.html" data-en="&larr; All Essays" data-cn="&larr; 全部文章">&larr; All Essays</a>
+                <a href="../index.html" data-en="Back to Home" data-cn="返回首页">Back to Home</a>
+            </nav>
+        </div>
+    </main>
+<footer class="footer">
+  <p data-en="© 2026 Wild Note · Roger Liu · Writing for the wild" data-cn="© 2026 Wild Note · Roger Liu · 为野生书写">© 2026 Wild Note · Roger Liu · Writing for the wild</p>
+  <p style="margin-top:.4rem;"><a href="../index.html" data-en="← Back to Home" data-cn="← 返回首页">← Back to Home</a></p>
+</footer>
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60),{passive:true});
+function setLanguage(lang){
+  document.querySelectorAll('[data-cn]').forEach(el=>{
+    const t=el.getAttribute('data-'+lang);
+    if(t!==null&&t!=='')el.textContent=t;
+  });
+  document.documentElement.lang=lang==='cn'?'zh-CN':'en';
+  document.getElementById('langEN').classList.toggle('active',lang==='en');
+  document.getElementById('langCN').classList.toggle('active',lang==='cn');
+  document.title=lang==='cn'?'当GDP遇上碳预算：一个高中生的困惑与求索 — Wild Note':'When GDP Meets Carbon Budget: A Student's Confusion and Quest — Wild Note';
+  try{localStorage.setItem('wildnote-lang',lang);}catch(e){}
+}
+document.getElementById('langEN').addEventListener('click',()=>setLanguage('en'));
+document.getElementById('langCN').addEventListener('click',()=>setLanguage('cn'));
+let savedLang='en';
+try{savedLang=localStorage.getItem('wildnote-lang')||'en';}catch(e){}
+setLanguage(savedLang);
+</script>
+</body>
+</html>
